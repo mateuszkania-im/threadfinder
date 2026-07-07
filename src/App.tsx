@@ -1,89 +1,92 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Plus } from 'lucide-react'
+import { Plus, RotateCcw } from 'lucide-react'
 import { Header, type Route } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
 import { DesignSystem } from '@/components/DesignSystem'
+import { ContractsPage } from '@/components/ContractsPage'
 import { Composer } from '@/components/Composer'
 import { RetrievalIndicator } from '@/components/RetrievalIndicator'
 import { ContextPackView } from '@/components/ContextPackView'
 import { Button } from '@/components/ui/button'
 import { SCENARIOS, type ContextPack } from '@/data/scenarios'
-import { HISTORY, type HistoryItem } from '@/data/history'
+import type { HistoryGroup, HistoryItem } from '@/data/history'
+import { api } from '@/api'
 import { SHOW_DEV_TOOLS } from '@/lib/env'
 import { useLocalStorage } from '@/lib/useLocalStorage'
 import { cn } from '@/lib/utils'
 
-type Mode = 'idle' | 'thinking' | 'answer'
-
-const ALL_HISTORY = HISTORY.flatMap((g) => g.items)
-
-function packFor(item: HistoryItem): ContextPack | null {
-  const scenario = SCENARIOS.find((s) => s.id === item.scenarioId)
-  return scenario ? { ...scenario, question: item.title } : null
-}
+type Mode = 'idle' | 'thinking' | 'answer' | 'error'
 
 export default function App() {
   const [route, setRoute] = useState<Route>('app')
   const [mode, setMode] = useState<Mode>('idle')
   const [pack, setPack] = useState<ContextPack | null>(null)
+  const [pendingQuestion, setPendingQuestion] = useState('')
   const [play, setPlay] = useState(false)
+  const [history, setHistory] = useState<HistoryGroup[]>([])
   const [activeHistoryId, setActiveHistoryId] = useLocalStorage<string | null>(
     'tf.activeThread',
     null,
   )
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const timers = useRef<number[]>([])
+  const reqRef = useRef(0)
 
-  const clearTimers = () => {
-    timers.current.forEach((t) => window.clearTimeout(t))
-    timers.current = []
-  }
-
-  const ask = useCallback((next: ContextPack) => {
-    clearTimers()
+  // One async entry point. Everything (chips, history, free text) routes here.
+  const ask = useCallback((question: string, scenarioId?: string) => {
+    const reqId = ++reqRef.current
     setPlay(false)
-    setPack(next)
+    setPendingQuestion(question)
     setMode('thinking')
-    // mock orchestrator latency, then reveal + play the thread
-    timers.current.push(
-      window.setTimeout(() => {
+    api
+      .ask(question, { scenarioId })
+      .then((result) => {
+        if (reqRef.current !== reqId) return
+        setPack(result)
         setMode('answer')
-        timers.current.push(window.setTimeout(() => setPlay(true), 60))
-      }, 1750),
-    )
+        setTimeout(() => {
+          if (reqRef.current === reqId) setPlay(true)
+        }, 60)
+      })
+      .catch(() => {
+        if (reqRef.current !== reqId) return
+        setMode('error')
+      })
   }, [])
 
-  // Restore the last opened thread on load — instantly, no retrieval replay.
+  // Load sidebar history from the API, then restore the last opened thread.
   useEffect(() => {
-    const item = activeHistoryId ? ALL_HISTORY.find((i) => i.id === activeHistoryId) : null
-    const restored = item ? packFor(item) : null
-    if (restored) {
-      setPack(restored)
-      setMode('answer')
-      setPlay(true)
+    let cancelled = false
+    api.getHistory().then((groups) => {
+      if (cancelled) return
+      setHistory(groups)
+      const id = activeHistoryId
+      const item = id ? groups.flatMap((g) => g.items).find((i) => i.id === id) : null
+      if (item) ask(item.title, item.scenarioId)
+    })
+    return () => {
+      cancelled = true
     }
-    // run once on mount
+    // mount only
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const reset = () => {
-    clearTimers()
+    reqRef.current++
     setMode('idle')
     setPlay(false)
     setPack(null)
+    setPendingQuestion('')
     setActiveHistoryId(null)
     setRoute('app')
     setSidebarOpen(false)
   }
 
   const selectHistory = (item: HistoryItem) => {
-    const next = packFor(item)
-    if (!next) return
     setActiveHistoryId(item.id)
     setRoute('app')
     setSidebarOpen(false)
-    ask(next)
+    ask(item.title, item.scenarioId)
   }
 
   const effectiveRoute: Route = SHOW_DEV_TOOLS ? route : 'app'
@@ -91,6 +94,7 @@ export default function App() {
   return (
     <div className="app-canvas flex min-h-dvh">
       <Sidebar
+        history={history}
         activeId={activeHistoryId}
         onNew={reset}
         onSelect={selectHistory}
@@ -102,6 +106,7 @@ export default function App() {
         <Header route={route} onRoute={setRoute} onMenu={() => setSidebarOpen(true)} />
 
         {effectiveRoute === 'design' && <DesignSystem />}
+        {effectiveRoute === 'contracts' && <ContractsPage />}
 
         {/* answer top bar */}
         <AnimatePresence>
@@ -124,7 +129,7 @@ export default function App() {
                           key={s.id}
                           onClick={() => {
                             setActiveHistoryId(null)
-                            ask(s)
+                            ask(s.question, s.id)
                           }}
                           className={cn(
                             'flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12.5px] font-medium transition-all',
@@ -161,8 +166,29 @@ export default function App() {
                 </motion.div>
               )}
 
-              {mode === 'thinking' && pack && (
-                <RetrievalIndicator key="thinking" question={pack.question} />
+              {mode === 'thinking' && (
+                <RetrievalIndicator key="thinking" question={pendingQuestion} />
+              )}
+
+              {mode === 'error' && (
+                <motion.div
+                  key="error"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mx-auto flex w-full max-w-md flex-col items-center px-6 py-24 text-center"
+                >
+                  <p className="text-[15px] font-medium text-ink">Couldn’t reach the assistant</p>
+                  <p className="mt-1.5 text-[13px] text-muted-foreground">
+                    The request didn’t come back. Check the connection and try again.
+                  </p>
+                  <Button
+                    variant="outline"
+                    className="mt-5"
+                    onClick={() => ask(pendingQuestion)}
+                  >
+                    <RotateCcw className="h-4 w-4" /> Retry
+                  </Button>
+                </motion.div>
               )}
 
               {mode === 'answer' && pack && (

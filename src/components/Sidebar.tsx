@@ -6,7 +6,7 @@ import {
   Pencil,
   Search,
 } from 'lucide-react'
-import { HISTORY, type HistoryItem } from '@/data/history'
+import type { HistoryGroup, HistoryItem } from '@/data/history'
 import {
   Tooltip,
   TooltipContent,
@@ -23,12 +23,14 @@ const DOT: Record<string, string> = {
 }
 
 export function Sidebar({
+  history,
   activeId,
   onNew,
   onSelect,
   open,
   onClose,
 }: {
+  history: HistoryGroup[]
   activeId: string | null
   onNew: () => void
   onSelect: (item: HistoryItem) => void
@@ -57,6 +59,7 @@ export function Sidebar({
       >
         {collapsed ? (
           <CollapsedRail
+            history={history}
             activeId={activeId}
             onExpand={() => setCollapsed(false)}
             onNew={onNew}
@@ -64,6 +67,7 @@ export function Sidebar({
           />
         ) : (
           <ExpandedBody
+            history={history}
             activeId={activeId}
             onCollapse={() => setCollapsed(true)}
             onNew={onNew}
@@ -78,11 +82,13 @@ export function Sidebar({
 /* ── expanded ─────────────────────────────────────────────────────────────── */
 
 function ExpandedBody({
+  history,
   activeId,
   onCollapse,
   onNew,
   onSelect,
 }: {
+  history: HistoryGroup[]
   activeId: string | null
   onCollapse: () => void
   onNew: () => void
@@ -146,7 +152,7 @@ function ExpandedBody({
 
       {/* history */}
       <nav className="min-h-0 flex-1 overflow-y-auto px-3 pb-4">
-        {HISTORY.map((group) => (
+        {history.map((group) => (
           <div key={group.label} className="mb-3">
             <p className="px-2 pb-1 pt-2 font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted-foreground">
               {group.label}
@@ -241,17 +247,19 @@ function HistoryRow({
 /* ── collapsed rail ───────────────────────────────────────────────────────── */
 
 function CollapsedRail({
+  history,
   activeId,
   onExpand,
   onNew,
   onSelect,
 }: {
+  history: HistoryGroup[]
   activeId: string | null
   onExpand: () => void
   onNew: () => void
   onSelect: (item: HistoryItem) => void
 }) {
-  const items = HISTORY.flatMap((g) => g.items)
+  const items = history.flatMap((g) => g.items)
   return (
     <TooltipProvider delayDuration={80}>
       <motion.div

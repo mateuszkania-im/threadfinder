@@ -13,7 +13,7 @@ import {
 
 const CONNECTED: SourceType[] = ['jira', 'confluence', 'figma', 'onedrive', 'github']
 
-export type Route = 'app' | 'design'
+export type Route = 'app' | 'design' | 'contracts'
 
 export function Header({
   route,
@@ -75,6 +75,7 @@ export function Header({
                 [
                   ['app', 'Assistant'],
                   ['design', 'Design system'],
+                  ['contracts', 'API'],
                 ] as const
               ).map(([key, label]) => (
                 <button

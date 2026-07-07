@@ -2,19 +2,19 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { SCENARIOS, type ContextPack } from '@/data/scenarios'
+import { SCENARIOS } from '@/data/scenarios'
 import { cn } from '@/lib/utils'
 
-export function Composer({ onAsk }: { onAsk: (pack: ContextPack) => void }) {
+export function Composer({
+  onAsk,
+}: {
+  onAsk: (question: string, scenarioId?: string) => void
+}) {
   const [value, setValue] = useState('')
 
   function submit(e: React.FormEvent) {
     e.preventDefault()
-    const q = value.trim().toLowerCase()
-    const match =
-      SCENARIOS.find((s) => q && s.question.toLowerCase().includes(q.slice(0, 6))) ??
-      SCENARIOS[0]
-    onAsk(match)
+    onAsk(value.trim())
   }
 
   return (
@@ -93,7 +93,7 @@ export function Composer({ onAsk }: { onAsk: (pack: ContextPack) => void }) {
           {SCENARIOS.map((s) => (
             <button
               key={s.id}
-              onClick={() => onAsk(s)}
+              onClick={() => onAsk(s.question, s.id)}
               className={cn(
                 'group flex flex-1 flex-col items-start gap-1.5 rounded-xl border border-border/80 bg-white/80 p-3.5 text-left backdrop-blur transition-all',
                 'hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-card',
