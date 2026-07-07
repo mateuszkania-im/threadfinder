@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 213 62% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 213 62% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 62% 15%;
+
+    --primary: 245 100% 68%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 214 44% 96%;
+    --secondary-foreground: 214 40% 24%;
+
+    --muted: 214 44% 96%;
+    --muted-foreground: 214 16% 48%;
+
+    --accent: 245 76% 96%;
+    --accent-foreground: 245 62% 46%;
+
+    --destructive: 350 89% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 245 100% 68%;
+
+    --radius: 0.85rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
+  }
+
+  ::selection {
+    background: rgba(99, 91, 255, 0.18);
+  }
+}
+
+/* App canvas: soft Stripe-like light field */
+.app-canvas {
+  background:
+    radial-gradient(1200px 600px at 82% -8%, rgba(183, 195, 255, 0.42), transparent 60%),
+    radial-gradient(900px 520px at 8% -6%, rgba(255, 201, 224, 0.34), transparent 58%),
+    linear-gradient(180deg, #ffffff 0%, #f6f9fc 100%);
+}
+
+/* Aurora hero mesh */
+.aurora {
+  background:
+    radial-gradient(42% 58% at 18% 28%, rgba(160, 176, 255, 0.95), transparent 68%),
+    radial-gradient(38% 54% at 80% 22%, rgba(196, 170, 255, 0.9), transparent 66%),
+    radial-gradient(44% 64% at 64% 80%, rgba(255, 186, 216, 0.9), transparent 68%),
+    radial-gradient(40% 56% at 28% 84%, rgba(168, 238, 224, 0.85), transparent 68%);
+  filter: blur(30px) saturate(1.12);
+}
+
+.thread-node-glow {
+  filter: drop-shadow(0 0 6px rgba(99, 91, 255, 0.55));
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
