@@ -13,22 +13,19 @@ import { SCENARIOS, type ContextPack } from '@/data/scenarios'
 import type { HistoryGroup, HistoryItem } from '@/data/history'
 import { api } from '@/api'
 import { SHOW_DEV_TOOLS } from '@/lib/env'
-import { useLocalStorage } from '@/lib/useLocalStorage'
+import { pathToRoute, routeToPath } from '@/lib/router'
 import { cn } from '@/lib/utils'
 
 type Mode = 'idle' | 'thinking' | 'answer' | 'error'
 
 export default function App() {
-  const [route, setRoute] = useState<Route>('app')
+  const [route, setRoute] = useState<Route>(() => pathToRoute(window.location.pathname))
   const [mode, setMode] = useState<Mode>('idle')
   const [pack, setPack] = useState<ContextPack | null>(null)
   const [pendingQuestion, setPendingQuestion] = useState('')
   const [play, setPlay] = useState(false)
   const [history, setHistory] = useState<HistoryGroup[]>([])
-  const [activeHistoryId, setActiveHistoryId] = useLocalStorage<string | null>(
-    'tf.activeThread',
-    null,
-  )
+  const [activeHistoryId, setActiveHistoryId] = useState<string | null>(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const reqRef = useRef(0)
 
@@ -54,21 +51,28 @@ export default function App() {
       })
   }, [])
 
-  // Load sidebar history from the API, then restore the last opened thread.
+  // Load sidebar history from the API. The app always opens on the idle hero.
   useEffect(() => {
     let cancelled = false
     api.getHistory().then((groups) => {
-      if (cancelled) return
-      setHistory(groups)
-      const id = activeHistoryId
-      const item = id ? groups.flatMap((g) => g.items).find((i) => i.id === id) : null
-      if (item) ask(item.title, item.scenarioId)
+      if (!cancelled) setHistory(groups)
     })
     return () => {
       cancelled = true
     }
-    // mount only
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // URL <-> view. Push a new history entry on navigation, sync on back/forward.
+  const navigate = useCallback((next: Route) => {
+    setRoute(next)
+    const path = routeToPath(next)
+    if (window.location.pathname !== path) window.history.pushState({}, '', path)
+  }, [])
+
+  useEffect(() => {
+    const onPop = () => setRoute(pathToRoute(window.location.pathname))
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
   }, [])
 
   const reset = () => {
@@ -78,13 +82,13 @@ export default function App() {
     setPack(null)
     setPendingQuestion('')
     setActiveHistoryId(null)
-    setRoute('app')
+    navigate('app')
     setSidebarOpen(false)
   }
 
   const selectHistory = (item: HistoryItem) => {
     setActiveHistoryId(item.id)
-    setRoute('app')
+    navigate('app')
     setSidebarOpen(false)
     ask(item.title, item.scenarioId)
   }
@@ -103,7 +107,7 @@ export default function App() {
       />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <Header route={route} onRoute={setRoute} onMenu={() => setSidebarOpen(true)} />
+        <Header route={route} onRoute={navigate} onMenu={() => setSidebarOpen(true)} />
 
         {effectiveRoute === 'design' && <DesignSystem />}
         {effectiveRoute === 'contracts' && <ContractsPage />}
