@@ -23,5 +23,3 @@ dist-ssr
 *.sln
 *.sw?
 
-# CI workflow needs gh `workflow` scope; deploying Pages manually for now
-.github/
