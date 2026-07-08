@@ -183,7 +183,16 @@ const KIND_COLOR: Record<string, string> = {
   decision: '#635BFF',
 }
 
+const KIND_LABEL: Record<string, string> = {
+  ticket: 'Ticket',
+  design: 'Design',
+  doc: 'Document',
+  code: 'Code',
+  decision: 'Decision',
+}
+
 export function TimelineBlock({ pack }: { pack: ContextPack }) {
+  const kinds = Array.from(new Set(pack.timeline.map((t) => t.kind)))
   return (
     <Card>
       <CardHeader>
@@ -212,6 +221,19 @@ export function TimelineBlock({ pack }: { pack: ContextPack }) {
             </motion.li>
           ))}
         </ol>
+
+        {/* colour legend — what the dots mean */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 border-t border-border/60 pt-3">
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted-foreground">
+            What the dots mean
+          </span>
+          {kinds.map((k) => (
+            <span key={k} className="inline-flex items-center gap-1.5 text-[12px] text-slate">
+              <span className="h-2 w-2 rounded-full" style={{ background: KIND_COLOR[k] }} />
+              {KIND_LABEL[k]}
+            </span>
+          ))}
+        </div>
       </CardContent>
     </Card>
   )

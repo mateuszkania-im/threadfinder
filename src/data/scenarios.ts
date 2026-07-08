@@ -97,11 +97,11 @@ export const SCENARIOS: ContextPack[] = [
       { name: 'Pete Peters', initials: 'PP', role: 'Frontend · last on the PR', relation: 'knows', hue: '#0EA5E9' },
     ],
     timeline: [
-      { date: '3 Mar', label: 'Epic opened, scope agreed', kind: 'ticket' },
-      { date: '18 Mar', label: 'Design system tokens finalised', kind: 'design' },
-      { date: '2 Apr', label: 'Rollout plan drafted', kind: 'doc' },
-      { date: '11 Apr', label: 'Last commit — 60% of components', kind: 'code' },
-      { date: '12 Apr', label: 'Paused for checkout rewrite', kind: 'decision' },
+      { date: '3 Mar 2026', label: 'Epic opened, scope agreed', kind: 'ticket' },
+      { date: '18 Mar 2026', label: 'Design system tokens finalised', kind: 'design' },
+      { date: '2 Apr 2026', label: 'Rollout plan drafted', kind: 'doc' },
+      { date: '11 Apr 2026', label: 'Last commit, 60% of components', kind: 'code' },
+      { date: '12 Apr 2026', label: 'Paused for checkout rewrite', kind: 'decision' },
     ],
     nextSteps: [
       'Confirm the current token set with Sylwia — palette v3 replaced the values in the draft PR.',
@@ -143,10 +143,10 @@ export const SCENARIOS: ContextPack[] = [
       { name: 'Flynn R.', initials: 'FR', role: 'PM · owns the decision', relation: 'reviewer', hue: '#10B981' },
     ],
     timeline: [
-      { date: '24 Feb', label: 'Activation study published (n=340)', kind: 'doc' },
-      { date: '6 May', label: 'Usability round 2 run', kind: 'design' },
-      { date: '22 May', label: 'Synthesis written up', kind: 'doc' },
-      { date: '28 May', label: 'Decision: defer invite step', kind: 'decision' },
+      { date: '24 Feb 2026', label: 'Activation study published (n=340)', kind: 'doc' },
+      { date: '6 May 2026', label: 'Usability round 2 run', kind: 'design' },
+      { date: '22 May 2026', label: 'Synthesis written up', kind: 'doc' },
+      { date: '28 May 2026', label: 'Decision: defer invite step', kind: 'decision' },
     ],
     nextSteps: [
       'Reuse the Q1 findings — no need to commission new discovery for desktop.',
@@ -191,7 +191,7 @@ export const SCENARIOS: ContextPack[] = [
       { date: 'Last yr', label: 'Growth ships notification centre', kind: 'code' },
       { date: '6 wks ago', label: 'RFC-081 opened in discovery', kind: 'doc' },
       { date: '3 wks ago', label: 'Delivery-layer spike created', kind: 'ticket' },
-      { date: '3 days ago', label: 'RFC updated — still unowned', kind: 'decision' },
+      { date: '3 days ago', label: 'RFC updated, still unowned', kind: 'decision' },
     ],
     nextSteps: [
       'Message Sam O. and the Platform Guild before scoping any build.',
