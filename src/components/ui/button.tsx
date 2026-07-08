@@ -9,9 +9,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-primary text-primary-foreground shadow-[0_1px_2px_rgba(10,37,64,0.16),0_8px_20px_-8px_rgba(99,91,255,0.55)] hover:brightness-[1.06] hover:-translate-y-px active:translate-y-0',
+          'bg-primary text-primary-foreground shadow-[0_1px_2px_rgba(10,37,64,0.16),0_8px_20px_-8px_rgba(46, 224, 126,0.55)] hover:brightness-[1.06] hover:-translate-y-px active:translate-y-0',
         outline:
-          'border border-border bg-white/70 text-ink backdrop-blur hover:bg-white hover:border-primary/30 hover:text-primary',
+          'border border-border bg-card/70 text-ink backdrop-blur hover:bg-card hover:border-primary/30 hover:text-primary',
         ghost: 'text-slate hover:bg-secondary hover:text-ink',
         subtle: 'bg-secondary text-secondary-foreground hover:bg-secondary/70',
       },

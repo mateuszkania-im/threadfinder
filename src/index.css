@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    /* Threadfinder — light surfaces, signal-green brand */
     --background: 0 0% 100%;
     --foreground: 213 62% 15%;
 
@@ -13,24 +14,24 @@
     --popover: 0 0% 100%;
     --popover-foreground: 213 62% 15%;
 
-    --primary: 245 100% 68%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 148 72% 42%;
+    --primary-foreground: 150 60% 97%;
 
-    --secondary: 214 44% 96%;
-    --secondary-foreground: 214 40% 24%;
+    --secondary: 160 24% 95%;
+    --secondary-foreground: 200 24% 24%;
 
-    --muted: 214 44% 96%;
-    --muted-foreground: 214 16% 48%;
+    --muted: 160 20% 95%;
+    --muted-foreground: 205 12% 46%;
 
-    --accent: 245 76% 96%;
-    --accent-foreground: 245 62% 46%;
+    --accent: 150 56% 94%;
+    --accent-foreground: 150 72% 26%;
 
-    --destructive: 350 89% 60%;
+    --destructive: 350 84% 58%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 245 100% 68%;
+    --border: 165 20% 90%;
+    --input: 165 20% 90%;
+    --ring: 148 72% 42%;
 
     --radius: 0.85rem;
   }
@@ -52,30 +53,30 @@
   }
 
   ::selection {
-    background: rgba(99, 91, 255, 0.18);
+    background: rgba(31, 196, 110, 0.2);
   }
 }
 
-/* App canvas: soft Stripe-like light field */
+/* App canvas: bright field with a soft green signal glow */
 .app-canvas {
   background:
-    radial-gradient(1200px 600px at 82% -8%, rgba(183, 195, 255, 0.42), transparent 60%),
-    radial-gradient(900px 520px at 8% -6%, rgba(255, 201, 224, 0.34), transparent 58%),
-    linear-gradient(180deg, #ffffff 0%, #f6f9fc 100%);
+    radial-gradient(1200px 620px at 82% -10%, rgba(31, 196, 110, 0.12), transparent 60%),
+    radial-gradient(900px 520px at 6% -6%, rgba(31, 196, 110, 0.07), transparent 58%),
+    linear-gradient(180deg, #ffffff 0%, #f4faf6 100%);
 }
 
-/* Aurora hero mesh */
+/* Aurora hero mesh — green signal bloom on light */
 .aurora {
   background:
-    radial-gradient(42% 58% at 18% 28%, rgba(160, 176, 255, 0.95), transparent 68%),
-    radial-gradient(38% 54% at 80% 22%, rgba(196, 170, 255, 0.9), transparent 66%),
-    radial-gradient(44% 64% at 64% 80%, rgba(255, 186, 216, 0.9), transparent 68%),
-    radial-gradient(40% 56% at 28% 84%, rgba(168, 238, 224, 0.85), transparent 68%);
-  filter: blur(30px) saturate(1.12);
+    radial-gradient(40% 56% at 28% 30%, rgba(31, 196, 110, 0.45), transparent 68%),
+    radial-gradient(36% 52% at 74% 34%, rgba(52, 214, 132, 0.32), transparent 66%),
+    radial-gradient(44% 60% at 62% 82%, rgba(120, 230, 180, 0.35), transparent 70%),
+    radial-gradient(38% 54% at 24% 82%, rgba(168, 238, 210, 0.32), transparent 68%);
+  filter: blur(34px) saturate(1.08);
 }
 
 .thread-node-glow {
-  filter: drop-shadow(0 0 6px rgba(99, 91, 255, 0.55));
+  filter: drop-shadow(0 0 6px rgba(31, 196, 110, 0.45));
 }
 
 .tabular {

@@ -68,7 +68,7 @@ interface Field {
 
 function SchemaTable({ name, fields }: { name: string; fields: Field[] }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-border/70 bg-white shadow-card">
+    <div className="overflow-hidden rounded-xl border border-border/70 bg-card shadow-card">
       <div className="flex items-center gap-2 border-b border-border/60 bg-canvas/70 px-4 py-2.5">
         <code className="font-mono text-[12.5px] font-medium text-ink">{name}</code>
         <span className="rounded bg-secondary px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
@@ -120,7 +120,7 @@ function Operation({
   children: ReactNode
 }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-border/70 bg-white shadow-card">
+    <div className="overflow-hidden rounded-xl border border-border/70 bg-card shadow-card">
       <div className="flex flex-wrap items-center gap-3 border-b border-border/60 px-4 py-3">
         <MethodBadge method={method} />
         <code className="font-mono text-[14px] font-medium text-ink">{path}</code>
@@ -169,7 +169,7 @@ export function ContractsPage() {
         </p>
 
         <div className="mt-5 flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-white px-3 py-1.5 font-mono text-[12px]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-3 py-1.5 font-mono text-[12px]">
             <span className="text-muted-foreground">base</span>
             <span className="text-ink">{'{VITE_API_BASE_URL}'}</span>
           </span>
@@ -277,7 +277,7 @@ export function ContractsPage() {
       {/* Enums */}
       <section className="mt-12">
         <h2 className="mb-5 text-[22px] font-semibold tracking-tight text-ink">Enums</h2>
-        <div className="rounded-xl border border-border/70 bg-white px-5 py-2 shadow-card">
+        <div className="rounded-xl border border-border/70 bg-card px-5 py-2 shadow-card">
           <EnumRow name="SourceType" values={['jira', 'confluence', 'figma', 'onedrive', 'github', 'doc']} />
           <EnumRow name="Freshness" values={['current', 'aging', 'stale']} />
           <EnumRow name="Confidence.level" values={['high', 'medium', 'low']} />

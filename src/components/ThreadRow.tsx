@@ -33,7 +33,7 @@ export function ThreadRow({
           <motion.span
             className="absolute left-1/2 top-0 h-[26px] w-[2px] -translate-x-1/2 origin-top rounded-full"
             style={{
-              background: 'linear-gradient(180deg, rgba(99,91,255,0.15), rgba(99,91,255,0.55))',
+              background: 'linear-gradient(180deg, rgba(46, 224, 126,0.15), rgba(46, 224, 126,0.55))',
             }}
             initial={false}
             variants={{ out: { scaleY: 0, opacity: 0 }, in: { scaleY: 1, opacity: 1 } }}
@@ -44,7 +44,7 @@ export function ThreadRow({
 
         {/* node */}
         <motion.span
-          className="thread-node-glow relative z-10 mt-[22px] grid h-8 w-8 place-items-center rounded-full border border-primary/25 bg-white text-primary shadow-[0_2px_10px_-2px_rgba(99,91,255,0.45)]"
+          className="thread-node-glow relative z-10 mt-[22px] grid h-8 w-8 place-items-center rounded-full border border-primary/25 bg-card text-primary shadow-[0_2px_10px_-2px_rgba(46, 224, 126,0.45)]"
           initial={false}
           variants={{
             out: { scale: 0.4, opacity: 0 },
@@ -61,7 +61,7 @@ export function ThreadRow({
           <motion.span
             className={cn('w-[2px] flex-1 origin-top rounded-full')}
             style={{
-              background: 'linear-gradient(180deg, rgba(99,91,255,0.55), rgba(99,91,255,0.15))',
+              background: 'linear-gradient(180deg, rgba(46, 224, 126,0.55), rgba(46, 224, 126,0.15))',
             }}
             initial={false}
             variants={{ out: { scaleY: 0, opacity: 0 }, in: { scaleY: 1, opacity: 1 } }}

@@ -18,13 +18,13 @@ export function RetrievalIndicator({ question }: { question: string }) {
         {SWEEP.map((s, i) => (
           <motion.span
             key={s}
-            className="grid h-11 w-11 place-items-center rounded-xl border border-border/70 bg-white shadow-card"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-border/70 bg-card shadow-card"
             initial={{ opacity: 0.3, scale: 0.9, y: 0 }}
             animate={{
               opacity: [0.3, 1, 0.55],
               scale: [0.9, 1.08, 1],
               y: [0, -6, 0],
-              borderColor: ['rgba(0,0,0,0.06)', SOURCE_META[s].color, 'rgba(0,0,0,0.06)'],
+              borderColor: ['rgba(10,37,64,0.08)', SOURCE_META[s].color, 'rgba(10,37,64,0.08)'],
             }}
             transition={{
               duration: 1.1,

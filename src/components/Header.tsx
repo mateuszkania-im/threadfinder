@@ -25,12 +25,12 @@ export function Header({
   onMenu: () => void
 }) {
   return (
-    <header className="sticky top-0 z-30 border-b border-border/70 bg-white/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-30 border-b border-border/70 bg-card/70 backdrop-blur-xl">
       <div className="flex h-16 items-center gap-4 px-4 sm:px-6">
         {/* mobile menu */}
         <button
           onClick={onMenu}
-          className="grid h-9 w-9 place-items-center rounded-lg border border-border/70 bg-white text-slate md:hidden"
+          className="grid h-9 w-9 place-items-center rounded-lg border border-border/70 bg-card text-slate md:hidden"
           aria-label="Open history"
         >
           <Menu className="h-4 w-4" />
@@ -49,7 +49,7 @@ export function Header({
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.4 + i * 0.06 }}
-                    className="grid h-7 w-7 place-items-center rounded-md border border-border/70 bg-white"
+                    className="grid h-7 w-7 place-items-center rounded-md border border-border/70 bg-card"
                   >
                     <SourceIcon type={s} size={15} />
                   </motion.span>
@@ -84,7 +84,7 @@ export function Header({
                   className={cn(
                     'rounded-full px-3 py-1.5 text-[12.5px] font-medium transition-all',
                     route === key
-                      ? 'bg-white text-ink shadow-[0_1px_3px_rgba(10,37,64,0.1)]'
+                      ? 'bg-card text-ink shadow-[0_1px_3px_rgba(10,37,64,0.1)]'
                       : 'text-muted-foreground hover:text-slate',
                   )}
                 >

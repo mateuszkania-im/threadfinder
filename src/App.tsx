@@ -119,7 +119,7 @@ export default function App() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className="sticky top-16 z-20 border-b border-border/60 bg-white/70 backdrop-blur-xl"
+              className="sticky top-16 z-20 border-b border-border/60 bg-card/70 backdrop-blur-xl"
             >
               <div className="flex items-center gap-2 px-5 py-2.5">
                 {SHOW_DEV_TOOLS ? (
@@ -138,8 +138,8 @@ export default function App() {
                           className={cn(
                             'flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12.5px] font-medium transition-all',
                             s.id === pack.id && !activeHistoryId
-                              ? 'border-transparent bg-ink text-white'
-                              : 'border-border/70 bg-white text-slate hover:border-primary/30 hover:text-primary',
+                              ? 'border-transparent bg-elevated text-white'
+                              : 'border-border/70 bg-card text-slate hover:border-primary/30 hover:text-primary',
                           )}
                         >
                           <span className="font-mono text-[10px] opacity-70">0{i + 1}</span>

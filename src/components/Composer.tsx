@@ -29,7 +29,7 @@ export function Composer({
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mb-5 inline-flex items-center gap-2 rounded-full border border-border/70 bg-white/70 px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-slate backdrop-blur"
+        className="mb-5 inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/70 px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-slate backdrop-blur"
       >
         <span className="h-1.5 w-1.5 rounded-full bg-primary" />
         Project memory · one question away
@@ -44,7 +44,7 @@ export function Composer({
         What do we already
         <br />
         know about&nbsp;
-        <span className="bg-gradient-to-r from-primary via-src-figma to-src-jira bg-clip-text text-transparent">
+        <span className="bg-gradient-to-r from-[#17B866] via-[#2EE07E] to-[#4FE3C0] bg-clip-text text-transparent">
           this?
         </span>
       </motion.h1>
@@ -55,8 +55,8 @@ export function Composer({
         transition={{ duration: 0.6, delay: 0.15 }}
         className="mt-4 max-w-lg text-balance text-center text-[15px] leading-relaxed text-muted-foreground"
       >
-        Ask in plain language. THREADFINDER pulls the thread through Jira, Confluence,
-        Figma, OneDrive and GitHub — and hands back a context pack, not just an answer.
+        Ask in plain language. Threadfinder pulls the thread through Jira, Confluence,
+        Figma, OneDrive and GitHub, and hands back a context pack, not just an answer.
       </motion.p>
 
       {/* ask box */}
@@ -65,7 +65,7 @@ export function Composer({
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.22 }}
-        className="group mt-8 flex w-full items-center gap-2 rounded-2xl border border-border bg-white p-2 pl-4 shadow-float transition-all focus-within:border-primary/40 focus-within:shadow-glow"
+        className="group mt-8 flex w-full items-center gap-2 rounded-2xl border border-border bg-card p-2 pl-4 shadow-float transition-all focus-within:border-primary/40 focus-within:shadow-glow"
       >
         <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
         <input
@@ -95,7 +95,7 @@ export function Composer({
               key={s.id}
               onClick={() => onAsk(s.question, s.id)}
               className={cn(
-                'group flex flex-1 flex-col items-start gap-1.5 rounded-xl border border-border/80 bg-white/80 p-3.5 text-left backdrop-blur transition-all',
+                'group flex flex-1 flex-col items-start gap-1.5 rounded-xl border border-border/80 bg-card/80 p-3.5 text-left backdrop-blur transition-all',
                 'hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-card',
               )}
             >

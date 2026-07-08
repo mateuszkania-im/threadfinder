@@ -44,14 +44,14 @@ export function Sidebar({
       {/* mobile backdrop */}
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-ink/20 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 z-40 bg-elevated/20 backdrop-blur-sm md:hidden"
           onClick={onClose}
         />
       )}
 
       <aside
         className={cn(
-          'z-50 flex h-dvh shrink-0 flex-col border-r border-border/70 bg-white/80 backdrop-blur-xl',
+          'z-50 flex h-dvh shrink-0 flex-col border-r border-border/70 bg-card/80 backdrop-blur-xl',
           'fixed inset-y-0 left-0 transition-[width,transform] duration-300 ease-out md:sticky md:top-0 md:translate-x-0',
           collapsed ? 'w-[72px]' : 'w-[268px]',
           open ? 'translate-x-0' : '-translate-x-full',
@@ -103,11 +103,13 @@ function ExpandedBody({
     >
       {/* brand */}
       <div className="flex items-center gap-2.5 px-4 pb-3 pt-4">
-        <button onClick={onNew} className="flex items-center gap-2.5">
+        <button onClick={onNew} className="flex items-center gap-2.5 text-left">
           <ThreadMark />
-          <div className="leading-none">
-            <span className="font-semibold tracking-tight text-ink">THREAD</span>
-            <span className="font-semibold tracking-tight text-primary">FINDER</span>
+          <div className="leading-tight">
+            <div className="text-[15px] font-semibold tracking-tight text-ink">Threadfinder</div>
+            <div className="font-mono text-[8px] uppercase tracking-[0.18em] text-primary">
+              Project memory assistant
+            </div>
           </div>
         </button>
         <button
@@ -127,12 +129,12 @@ function ExpandedBody({
           whileTap={{ scale: 0.98 }}
           initial="r"
           animate="r"
-          className="flex items-center gap-2.5 rounded-lg border border-border bg-white px-3 py-2.5 text-[13.5px] font-medium text-ink shadow-sm transition-colors hover:border-primary/40"
+          className="flex items-center gap-2.5 rounded-lg border border-border bg-card px-3 py-2.5 text-[13.5px] font-medium text-ink shadow-sm transition-colors hover:border-primary/40"
         >
           <motion.span
             variants={{ r: { rotate: 0, scale: 1 }, h: { rotate: -12, scale: 1.08 } }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-            className="grid h-6 w-6 place-items-center rounded-md bg-primary text-white"
+            className="grid h-6 w-6 place-items-center rounded-md bg-primary text-primary-foreground"
           >
             <Pencil className="h-3.5 w-3.5" />
           </motion.span>
@@ -174,7 +176,7 @@ function ExpandedBody({
       {/* footer */}
       <div className="border-t border-border/70 px-3 py-3">
         <div className="flex items-center gap-2 rounded-lg px-2 py-1.5">
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-ink text-[11px] font-bold text-white">
+          <span className="grid h-7 w-7 place-items-center rounded-full bg-elevated text-[11px] font-bold text-white">
             S
           </span>
           <div className="min-w-0 flex-1 leading-tight">
@@ -292,7 +294,7 @@ function CollapsedRail({
               whileHover={{ scale: 1.08, rotate: -10 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: 'spring', stiffness: 400, damping: 14 }}
-              className="mt-1.5 grid h-9 w-9 place-items-center rounded-lg bg-primary text-white shadow-[0_2px_10px_-2px_rgba(99,91,255,0.55)]"
+              className="mt-1.5 grid h-9 w-9 place-items-center rounded-lg bg-primary text-primary-foreground shadow-[0_2px_10px_-2px_rgba(46,224,126,0.55)]"
               aria-label="New question"
             >
               <Pencil className="h-4 w-4" />
@@ -334,7 +336,7 @@ function CollapsedRail({
           })}
         </div>
 
-        <span className="mt-3 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink text-[11px] font-bold text-white">
+        <span className="mt-3 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-elevated text-[11px] font-bold text-white">
           S
         </span>
       </motion.div>
@@ -346,22 +348,24 @@ function CollapsedRail({
 
 function ThreadMark() {
   return (
-    <span className="relative grid h-8 w-8 place-items-center rounded-lg bg-ink">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <path
-          d="M5 6c5 0 5 12 10 12 3 0 4-2 4-4"
-          stroke="url(#tgs)"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <circle cx="5" cy="6" r="2" fill="#B7C3FF" />
-        <circle cx="19" cy="14" r="1.6" fill="#FFC9E0" />
-        <defs>
-          <linearGradient id="tgs" x1="4" y1="6" x2="20" y2="18" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#B7C3FF" />
-            <stop offset="1" stopColor="#C9B6FF" />
-          </linearGradient>
-        </defs>
+    <span className="grid h-8 w-8 shrink-0 place-items-center">
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 40 40"
+        fill="none"
+        stroke="#17B866"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        {/* left f — hooked top into stem + crossbar */}
+        <path d="M17 12 a5 5 0 0 0 -9 3.4 V30" />
+        <path d="M6 20 H17" />
+        {/* right f — interlocked, hooked bottom + crossbar */}
+        <path d="M23 10 V24.6 a5 5 0 0 0 9 3.4" />
+        <path d="M20 16 H31" />
       </svg>
     </span>
   )

@@ -49,10 +49,12 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        // Light surfaces + signal-green brand
         ink: '#0A2540',
         slate: '#3D4B60',
-        blurple: '#635BFF',
-        canvas: '#F6F9FC',
+        blurple: '#1FC46E',
+        canvas: '#F4FAF6',
+        elevated: '#0A2540',
         signal: {
           high: '#10B981',
           med: '#F59E0B',
@@ -74,8 +76,8 @@ export default {
       },
       boxShadow: {
         card: '0 1px 2px rgba(10,37,64,0.04), 0 8px 24px -12px rgba(10,37,64,0.12)',
-        float: '0 24px 60px -24px rgba(99,91,255,0.28), 0 2px 8px rgba(10,37,64,0.06)',
-        glow: '0 0 0 1px rgba(99,91,255,0.10), 0 12px 40px -12px rgba(99,91,255,0.25)',
+        float: '0 24px 60px -24px rgba(20,120,70,0.22), 0 2px 8px rgba(10,37,64,0.06)',
+        glow: '0 0 0 1px rgba(31,196,110,0.14), 0 12px 40px -12px rgba(31,196,110,0.3)',
       },
       keyframes: {
         'aurora-drift': {

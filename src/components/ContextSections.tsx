@@ -26,7 +26,7 @@ const STATUS_TONE: Record<
 > = {
   active: { dot: '#10B981', badge: 'bg-emerald-50 text-emerald-700' },
   paused: { dot: '#F59E0B', badge: 'bg-amber-50 text-amber-700' },
-  shipped: { dot: '#635BFF', badge: 'bg-primary/10 text-primary' },
+  shipped: { dot: '#1FC46E', badge: 'bg-primary/10 text-primary' },
   unknown: { dot: '#F43F5E', badge: 'bg-rose-50 text-rose-600' },
 }
 
@@ -43,7 +43,7 @@ export function SummaryBlock({ pack }: { pack: ContextPack }) {
   const tone = STATUS_TONE[pack.status.tone]
   return (
     <Card className="overflow-hidden shadow-float">
-      <div className="h-1 w-full bg-gradient-to-r from-primary/70 via-src-figma/60 to-src-jira/60" />
+      <div className="h-1 w-full bg-gradient-to-r from-[#17B866] via-[#2EE07E] to-[#4FE3C0]" />
       <CardContent className="p-6">
         <div className="mb-4 flex flex-wrap items-center gap-2">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
@@ -98,7 +98,7 @@ export function SourcesBlock({ pack }: { pack: ContextPack }) {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 * i, duration: 0.35 }}
-              className="group flex items-start gap-3 rounded-lg border border-border/70 bg-white p-3 transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-card"
+              className="group flex items-start gap-3 rounded-lg border border-border/70 bg-card p-3 transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-card"
             >
               <span
                 className="grid h-9 w-9 shrink-0 place-items-center rounded-lg"
@@ -176,11 +176,11 @@ export function PeopleBlock({ pack }: { pack: ContextPack }) {
 
 /* ── 4. Timeline ────────────────────────────────────────────────────────── */
 const KIND_COLOR: Record<string, string> = {
-  ticket: '#2684FF',
-  design: '#A259FF',
-  doc: '#8B5CF6',
-  code: '#1F2328',
-  decision: '#635BFF',
+  ticket: '#4FA9FF',
+  design: '#B98BFF',
+  doc: '#A78BFA',
+  code: '#9AA6B2',
+  decision: '#2EE07E',
 }
 
 const KIND_LABEL: Record<string, string> = {
@@ -209,7 +209,7 @@ export function TimelineBlock({ pack }: { pack: ContextPack }) {
               className="relative pb-3.5 last:pb-0"
             >
               <span
-                className="absolute -left-[23px] top-1 h-2.5 w-2.5 rounded-full ring-2 ring-white"
+                className="absolute -left-[23px] top-1 h-2.5 w-2.5 rounded-full ring-2 ring-white/10"
                 style={{ background: KIND_COLOR[t.kind] }}
               />
               <div className="flex items-baseline gap-2">
@@ -242,7 +242,7 @@ export function TimelineBlock({ pack }: { pack: ContextPack }) {
 /* ── 5. Next steps + gaps ───────────────────────────────────────────────── */
 export function NextStepsBlock({ pack }: { pack: ContextPack }) {
   return (
-    <Card className="border-primary/20 bg-gradient-to-b from-accent/40 to-white">
+    <Card className="border-primary/20 bg-gradient-to-b from-accent/40 to-card">
       <CardHeader>
         <CardTitle>Suggested next steps</CardTitle>
       </CardHeader>
@@ -256,7 +256,7 @@ export function NextStepsBlock({ pack }: { pack: ContextPack }) {
               transition={{ delay: 0.08 * i, duration: 0.3 }}
               className="flex items-start gap-3"
             >
-              <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-primary font-mono text-[11px] font-semibold text-white">
+              <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-primary font-mono text-[11px] font-semibold text-primary-foreground">
                 {i + 1}
               </span>
               <span className="text-[13.5px] leading-relaxed text-slate">{step}</span>

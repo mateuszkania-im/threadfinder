@@ -33,7 +33,7 @@ export function ContextPackView({ pack, play }: { pack: ContextPack; play: boole
         <span className="mb-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
           {pack.askedAs} asked
         </span>
-        <div className="max-w-[85%] rounded-2xl rounded-tr-md bg-ink px-4 py-2.5 text-[14px] leading-snug text-white shadow-float">
+        <div className="max-w-[85%] rounded-2xl rounded-tr-md bg-elevated px-4 py-2.5 text-[14px] leading-snug text-white shadow-float">
           {pack.question}
         </div>
       </motion.div>

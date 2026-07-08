@@ -66,7 +66,7 @@ function Swatch({
   dark?: boolean
 }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-border/70 bg-white shadow-card">
+    <div className="overflow-hidden rounded-xl border border-border/70 bg-card shadow-card">
       <div className="h-20 w-full" style={{ background: value }} />
       <div className="flex items-center justify-between gap-2 p-3">
         <div className="min-w-0">
@@ -99,7 +99,7 @@ function Story({
   return (
     <div
       className={cn(
-        'overflow-hidden rounded-xl border border-border/70 bg-white shadow-card',
+        'overflow-hidden rounded-xl border border-border/70 bg-card shadow-card',
         className,
       )}
     >
@@ -131,7 +131,9 @@ const SEMANTIC = [
   { name: 'Ink', value: '#0A2540', sub: 'headings · primary text' },
   { name: 'Slate', value: '#3D4B60', sub: 'body copy' },
   { name: 'Muted', value: '#7A8AA0', sub: 'captions · meta' },
-  { name: 'Blurple', value: '#635BFF', sub: 'primary · brand', dark: true },
+  { name: 'Canvas alt', value: '#F4FAF6', sub: 'sunken · green tint' },
+  { name: 'Signal green', value: '#1FC46E', sub: 'primary · brand', dark: true },
+  { name: 'Green bloom', value: '#2EE07E', sub: 'glow · logo accent', dark: true },
 ]
 
 const CONFIDENCE = [
@@ -163,19 +165,53 @@ export function DesignSystem() {
         className="mb-4"
       >
         <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-          THREADFINDER · design system
+          Threadfinder · design system
         </span>
         <h1 className="mt-3 text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink">
           One light system,
           <br />
-          one thread through it all.
+          one green thread through it.
         </h1>
         <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
-          A Stripe-bright surface with a single blurple through-line. Data is set in mono so
+          A bright surface with a single signal-green through-line. Data is set in mono so
           retrieved facts always look like facts. The thread and the signal meter are the two
           pieces you will recognise anywhere in the product.
         </p>
       </motion.div>
+
+      {/* Brand lockup */}
+      <div className="mb-2 flex flex-wrap items-center gap-5 rounded-xl border border-border/70 bg-card p-5 shadow-card">
+        <div className="flex items-center gap-3">
+          <svg
+            width="34"
+            height="34"
+            viewBox="0 0 40 40"
+            fill="none"
+            stroke="#17B866"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden
+          >
+            <path d="M17 12 a5 5 0 0 0 -9 3.4 V30" />
+            <path d="M6 20 H17" />
+            <path d="M23 10 V24.6 a5 5 0 0 0 9 3.4" />
+            <path d="M20 16 H31" />
+          </svg>
+          <div className="leading-tight">
+            <div className="text-[18px] font-semibold tracking-tight text-ink">Threadfinder</div>
+            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">
+              Project memory assistant
+            </div>
+          </div>
+        </div>
+        <div className="ml-auto flex items-center gap-2">
+          <span className="h-6 w-6 rounded-md" style={{ background: '#1FC46E' }} />
+          <span className="h-6 w-6 rounded-md" style={{ background: '#2EE07E' }} />
+          <span className="h-6 w-6 rounded-md border border-border" style={{ background: '#0A2540' }} />
+          <span className="h-6 w-6 rounded-md border border-border" style={{ background: '#FFFFFF' }} />
+        </div>
+      </div>
 
       {/* 01 — Color */}
       <Section n="01" title="Color" desc="Light surfaces, one saturated brand, semantic confidence and per-source accents.">
@@ -205,7 +241,7 @@ export function DesignSystem() {
               <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                 Source accents
               </p>
-              <div className="flex flex-col gap-2 rounded-xl border border-border/70 bg-white p-3 shadow-card">
+              <div className="flex flex-col gap-2 rounded-xl border border-border/70 bg-card p-3 shadow-card">
                 {SOURCES.map(([type, meta]) => (
                   <div key={type} className="flex items-center gap-3">
                     <span
@@ -228,14 +264,14 @@ export function DesignSystem() {
       <Section n="02" title="Typography" desc="Geist for everything human, Geist Mono for everything machine.">
         <div className="grid gap-6 sm:grid-cols-[1fr_1.4fr]">
           <div className="flex flex-col gap-3">
-            <div className="rounded-xl border border-border/70 bg-white p-5 shadow-card">
+            <div className="rounded-xl border border-border/70 bg-card p-5 shadow-card">
               <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                 Display / UI
               </span>
               <p className="mt-2 font-sans text-[30px] font-semibold tracking-tight text-ink">Geist</p>
               <p className="mt-1 text-[13px] text-muted-foreground">300 · 400 · 500 · 600 · 700 · 800</p>
             </div>
-            <div className="rounded-xl border border-border/70 bg-white p-5 shadow-card">
+            <div className="rounded-xl border border-border/70 bg-card p-5 shadow-card">
               <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                 Data / meta
               </span>
@@ -243,7 +279,7 @@ export function DesignSystem() {
               <p className="mt-1 font-mono text-[13px] text-muted-foreground">PATCH-142 · 84% · 12 Apr</p>
             </div>
           </div>
-          <div className="rounded-xl border border-border/70 bg-white p-5 shadow-card">
+          <div className="rounded-xl border border-border/70 bg-card p-5 shadow-card">
             {TYPE_SCALE.map((t) => (
               <div key={t.label} className="border-b border-border/60 py-3 last:border-b-0">
                 <code className="mb-1 block font-mono text-[11px] text-muted-foreground">{t.label}</code>
@@ -290,7 +326,7 @@ export function DesignSystem() {
               <div className="flex items-center gap-4">
                 <div className="relative flex flex-col items-center">
                   <span className="h-6 w-[2px] rounded-full bg-gradient-to-b from-primary/15 to-primary/55" />
-                  <span className="thread-node-glow grid h-8 w-8 place-items-center rounded-full border border-primary/25 bg-white text-primary shadow-[0_2px_10px_-2px_rgba(99,91,255,0.45)]">
+                  <span className="thread-node-glow grid h-8 w-8 place-items-center rounded-full border border-primary/25 bg-card text-primary shadow-[0_2px_10px_-2px_rgba(46, 224, 126,0.45)]">
                     <ArrowRight className="h-4 w-4" />
                   </span>
                   <span className="h-6 w-[2px] rounded-full bg-gradient-to-b from-primary/55 to-primary/15" />
@@ -303,7 +339,7 @@ export function DesignSystem() {
             </CardContent>
           </Card>
         </div>
-        <div className="mt-4 rounded-xl border border-border/70 bg-white p-5 shadow-card">
+        <div className="mt-4 rounded-xl border border-border/70 bg-card p-5 shadow-card">
           <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
             Source glyphs
           </p>
@@ -480,7 +516,7 @@ export function DesignSystem() {
       {/* 06 — Foundations */}
       <Section n="06" title="Foundations" desc="Radius, elevation and the motion choreography.">
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-border/70 bg-white p-5 shadow-card">
+          <div className="rounded-xl border border-border/70 bg-card p-5 shadow-card">
             <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
               Radius &amp; elevation
             </p>
@@ -498,12 +534,12 @@ export function DesignSystem() {
                 <code className="font-mono text-[11px] text-muted-foreground">lg · .85rem</code>
               </div>
               <div className="flex flex-col items-center gap-2">
-                <div className="h-16 w-16 rounded-lg bg-white shadow-float" />
+                <div className="h-16 w-16 rounded-lg bg-card shadow-float" />
                 <code className="font-mono text-[11px] text-muted-foreground">float</code>
               </div>
             </div>
           </div>
-          <div className="rounded-xl border border-border/70 bg-white p-5 shadow-card">
+          <div className="rounded-xl border border-border/70 bg-card p-5 shadow-card">
             <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
               Motion · pack reveal
             </p>
